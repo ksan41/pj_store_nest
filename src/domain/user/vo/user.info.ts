@@ -1,25 +1,24 @@
-import { Column, CreateDateColumn, DeleteDateColumn, UpdateDateColumn, } from 'typeorm';
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, UpdateDateColumn, } from 'typeorm';
 
 export class UserInfo {
-  @Column('user_name')
+  @Column({name: 'user_name'})
   userName: string;
 
-  @Column('nick_name')
+  @Column({name: 'nick_name'})
   nickName: string;
 
-  @Column('password')
+  @Column({name: 'password'})
   password: string;
 
-  @Column('email')
+  @Column({name: 'email'})
   email: string;
 
-  @Column('modifiedDate')
-  @UpdateDateColumn()
+  @UpdateDateColumn({name: 'modified_date'})
   modifiedDate: Date;
 
-  @CreateDateColumn()
+  @CreateDateColumn({name: 'join_date'})
   joinDate: Date;
 
-  @DeleteDateColumn()
+  @DeleteDateColumn({name: 'deleted_date'})
   deletedDate: Date;
 }
