@@ -18,10 +18,10 @@ export class UserEntity {
   grade: GradeEntity;
 
   @OneToMany(type => Address, address => address.user)
-  addresses: Array<Address>;
+  addresses: Address[];
 
   @OneToMany(type => PointEntity, point => point.user)
-  points: Array<PointEntity>;
+  points: PointEntity[];
 
   @Column("text")
   state: UserState;

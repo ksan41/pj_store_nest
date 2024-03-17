@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { UserEntity } from "./user.entity";
 
 @Entity({ name: 'address' })
@@ -6,7 +6,11 @@ export class Address {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column({ name: 'user_id' })
+  userId: string;
+
   @ManyToOne(type => UserEntity, user => user.addresses, { cascade: true })
+  @JoinColumn({ name: 'user_id' })
   user: UserEntity;
 
   @Column()
