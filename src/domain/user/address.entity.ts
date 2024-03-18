@@ -2,7 +2,7 @@ import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "t
 import { UserEntity } from "./user.entity";
 
 @Entity({ name: 'address' })
-export class Address {
+export class AddressEntity {
   @PrimaryGeneratedColumn()
   id: number;
 

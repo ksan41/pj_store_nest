@@ -1,7 +1,7 @@
 import { Column, Entity, OneToMany, OneToOne, PrimaryColumn } from 'typeorm';
 import { UserState } from './vo/user.state';
 import { UserInfo } from './vo/user.info';
-import { Address } from './address';
+import { AddressEntity } from './address.entity';
 import { PointEntity } from '../point/point.entity';
 import { GradeEntity } from '../grade/grade.entity';
 
@@ -17,8 +17,8 @@ export class UserEntity {
   @OneToOne(type => GradeEntity)
   grade: GradeEntity;
 
-  @OneToMany(type => Address, address => address.user)
-  addresses: Address[];
+  @OneToMany(type => AddressEntity, address => address.user)
+  addresses: AddressEntity[];
 
   @OneToMany(type => PointEntity, point => point.user)
   points: PointEntity[];
