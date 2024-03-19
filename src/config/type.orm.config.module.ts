@@ -1,16 +1,29 @@
-import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { UserEntity } from 'src/domain/user/user.entity';
-import { Address } from 'src/domain/user/address';
-import { PointEntity } from 'src/domain/point/point.entity';
-import { GradeEntity } from 'src/domain/grade/grade.entity';
+import { ConfigService } from '@nestjs/config';
+import { TypeOrmModuleAsyncOptions, TypeOrmModuleOptions } from '@nestjs/typeorm';
 
-export const typeOrmConfig: TypeOrmModuleOptions = {
+export const typeOrmConfig = (
+        configService: ConfigService
+): TypeOrmModuleOptions => {
+  return {
         type: 'mysql',
-        host: 'localhost',
-        port: 3306,
-        username: 'root',
-        password: '1234',
-        database: 'myshop',
-        entities: [UserEntity, Address, PointEntity, GradeEntity],
-        synchronize: true,
+        host: configService.get('db.host'),
+        port: configService.get('db.port'),
+        username: configService.get('db.username'),
+        password: configService.get('db.password'),
+        database: configService.get('db.database'),
+        entities: [__dirname + '/../**/**/*.entity{.ts,.js}',],
+        synchronize: configService.get('typeorm.synchronize'),
+  };
+};
+
+const getTypeOrmConfigAsync = async (
+        configService: ConfigService,
+      ): Promise<TypeOrmModuleOptions> => {
+        return typeOrmConfig(configService)
+      };
+      
+export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
+        inject: [ConfigService],
+        useFactory: (configService: ConfigService) =>
+        getTypeOrmConfigAsync(configService),
 };
