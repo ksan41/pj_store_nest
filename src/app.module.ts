@@ -3,15 +3,15 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { UserModule } from './domain/user/user.module';
-import config from 'config/config';
 import { typeOrmAsyncConfig } from './config/type.orm.config.module';
+import loadYaml from 'config/load.yaml';
 
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [config]
+      load: [loadYaml]
     }),
     TypeOrmModule.forRootAsync(typeOrmAsyncConfig),
     UserModule,

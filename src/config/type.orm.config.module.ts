@@ -1,18 +1,20 @@
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModuleAsyncOptions, TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { databaseConfig } from '../../config/load.yaml';
 
 export const typeOrmConfig = (
         configService: ConfigService
 ): TypeOrmModuleOptions => {
+  const database = configService.get<databaseConfig["db"]>('db');
   return {
         type: 'mysql',
-        host: configService.get('db.host'),
-        port: configService.get('db.port'),
-        username: configService.get('db.username'),
-        password: configService.get('db.password'),
-        database: configService.get('db.database'),
+        host: database.host,
+        port: database.port,
+        username: database.username,
+        password: database.password,
+        database: database.database,
         entities: [__dirname + '/../**/**/*.entity{.ts,.js}',],
-        synchronize: configService.get('typeorm.synchronize'),
+        synchronize: database.synchronize,
   };
 };
 
