@@ -1,9 +1,10 @@
-import { Column, Entity, OneToMany, OneToOne, PrimaryColumn } from 'typeorm';
+import { BeforeInsert, Column, Entity, OneToMany, OneToOne, PrimaryColumn } from 'typeorm';
 import { UserState } from './vo/user.state';
 import { UserInfo } from './vo/user.info';
 import { AddressEntity } from './address.entity';
 import { PointEntity } from '../point/point.entity';
 import { GradeEntity } from '../grade/grade.entity';
+import * as bcrypt from 'bcrypt';
 
 @Entity({ name: 'user' })
 export class UserEntity {
@@ -25,4 +26,12 @@ export class UserEntity {
 
   @Column("text")
   state: UserState;
+
+  @BeforeInsert()
+  async hashPassword() {
+    const salt = await bcrypt.genSalt();
+    const encryptPass = await bcrypt.hash(this.userInfo.password, salt);
+    this.userInfo.password = encryptPass;
+  }
+
 }

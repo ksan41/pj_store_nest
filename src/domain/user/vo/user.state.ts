@@ -1,5 +1,5 @@
 export enum UserState {
-  ENABLE,
-  STOPPED,
-  DELETED,
+  ENABLE = 'ENABLE',
+  STOPPED = 'STOPPED',
+  DELETED = 'DELETED',
 }
