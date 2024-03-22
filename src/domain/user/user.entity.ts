@@ -5,6 +5,7 @@ import { AddressEntity } from './address.entity';
 import { PointEntity } from '../point/point.entity';
 import { GradeEntity } from '../grade/grade.entity';
 import * as bcrypt from 'bcrypt';
+import { JoinUserDto } from './dto/join.user.dto';
 
 @Entity({ name: 'user' })
 export class UserEntity {
@@ -34,4 +35,17 @@ export class UserEntity {
     this.userInfo.password = encryptPass;
   }
 
+  toEntity(joinDto: JoinUserDto){
+      this.userId = joinDto.userId;
+      this.state = UserState.ENABLE;
+
+      const userInfo: UserInfo = new UserInfo();
+      userInfo.userName = joinDto.userName;
+      userInfo.password = joinDto.password;
+      userInfo.nickName = joinDto.nickName;
+      userInfo.email = joinDto.email;
+
+      this.userInfo = userInfo;
+      return this;
+  }
 }
