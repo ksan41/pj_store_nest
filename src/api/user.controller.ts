@@ -1,9 +1,9 @@
 import { Body, Controller, Post, Res } from '@nestjs/common';
-import { JoinUserDto } from '../dto/join.user.dto';
-import { UserService } from '../service/user.service';
-import { LoginUserInfoDto } from '../dto/login.user.info.dto';
+import { JoinUserDto } from '../domain/user/dto/join.user.dto';
+import { UserService } from '../domain/user/service/user.service';
+import { LoginUserInfoDto } from '../domain/user/dto/login.user.info.dto';
 import { ResponseMsg } from 'src/util/response.msg';
-import { UserEntity } from '../user.entity';
+import { UserEntity } from '../domain/user/user.entity';
 import { Response } from 'express';
 
 @Controller('user')
