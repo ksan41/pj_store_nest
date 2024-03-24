@@ -11,7 +11,7 @@ export class UserController {
 
   constructor (private readonly userService: UserService) {}
 
-  @Post('join')
+  @Post('')
   async joinUser(@Body() joinInfo: JoinUserDto): Promise<ResponseMsg> {
       let res: ResponseMsg = new ResponseMsg();
       const result = await this.userService.joinUser(joinInfo);
