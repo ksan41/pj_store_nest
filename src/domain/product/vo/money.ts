@@ -4,10 +4,14 @@ import { Column } from "typeorm";
 export class Money {
     
     @Column()
-    value: number;
+    price: number;
+
+    constructor(price: number) {
+        this.price = price;
+    }
 
     @Get()
-    getValue() {
-        return this.value;
+    getPrice() {
+        return this.price;
     }
 }
